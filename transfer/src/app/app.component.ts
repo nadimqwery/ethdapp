@@ -7,7 +7,7 @@ import { EthcontractService } from './ethcontract.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Dapp Transfer Application';
+  title = 'Ethereum Transfer App';
   accounts:any;
   transferFrom = '0x0';
   balance ='0 ETH';
