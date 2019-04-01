@@ -14,6 +14,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LeftSectionComponent } from './left-section/left-section.component';
+import { AccountInformationComponent } from './account-information/account-information.component';
+import { SellerComponent } from './escrow/seller/seller.component';
+import { BuyerComponent } from './escrow/buyer/buyer.component';
+import { EscrowComponent } from './escrow/escrow/escrow.component';
+import { RegisterBuyerComponent } from './escrow/register-buyer/register-buyer.component';
+import { RegisterSellerComponent } from './escrow/register-seller/register-seller.component';
+import { RegisterEscrowComponent } from './escrow/register-escrow/register-escrow.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +33,18 @@ import { LeftSectionComponent } from './left-section/left-section.component';
     DashboardComponent,
     FooterComponent,
     NavigationBarComponent,
-    LeftSectionComponent
+    LeftSectionComponent,
+    AccountInformationComponent,
+    SellerComponent,
+    BuyerComponent,
+    EscrowComponent,
+    RegisterBuyerComponent,
+    RegisterSellerComponent,
+    RegisterEscrowComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
   ],
   providers: [EthcontractService ],

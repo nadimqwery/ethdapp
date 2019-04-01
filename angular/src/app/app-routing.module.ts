@@ -10,6 +10,8 @@ import { PlatformServicesComponent } from './platform-services/platform-services
 
 import { SmartContractComponent } from './smart-contract/smart-contract.component';
 
+import { SellerComponent } from './escrow/seller/seller.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -18,6 +20,7 @@ const routes: Routes = [
  {path: 'platform-services', component: PlatformServicesComponent},
  {path: 'transfer', component: TransferFormComponent},
  {path: 'smart-contract', component: SmartContractComponent},
+ {path: 'seller', component: SellerComponent}
 
 ];
 

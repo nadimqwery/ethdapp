@@ -1,0 +1,59 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+  
+      <h1 class="panel-title bold">
+        <span class="glyphicon glyphicon-circle-arrow-right"></span> <b> Seller</b></h1>
+    </div>
+    <br>
+    <div class="panel-body">
+      
+    <form (ngSubmit)="onSubmit()" #newContract="ngForm">
+      <div class="form-group">
+        <label for="sellerAddress"><b>Seller Address</b></label>
+        <input type="text" class="form-control" [(ngModel)]="model.sellerAddress" name="sellerAddress" required
+          #sellerAddress="ngModel" [value]="model.sellerAddress">
+  
+        <div [hidden]="sellerAddress.valid || sellerAddress.pristine" class="alert alert-danger">
+          Seller Address is required
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="escrowAddress"><b>Escrow Address</b></label>
+          <input type="text" class="form-control" [(ngModel)]="model.escrowAddress" name="escrowAddress" required
+            #escrowAddress="ngModel">
+    
+          <div [hidden]="escrowAddress.valid || escrowAddress.pristine" class="alert alert-danger">
+            Escrow Address is required
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount"><b>Amount</b></label>
+            <input type="text" class="form-control" [(ngModel)]="model.Amount" name="Amount" required
+              #Amount="ngModel">
+      
+            <div [hidden]="Amount.valid || Amount.pristine" class="alert alert-danger">
+              Amount is required
+            </div>
+          </div>
+
+
+      <div class="form-group">
+        <label for="remarks"><b>Notes</b></label>
+        <textarea class="form-control" name="model.remarks" required [(ngModel)]="model.remarks" #remarks="ngModel"></textarea>
+        <div [hidden]="remarks.valid || remarks.pristine" class="alert alert-danger">
+            Notes are required
+          </div>
+      </div>
+      <div class="btn-group col-12" style="float: right; margin-top: 30px;">
+        <button type="submit" [disabled]="!newContract.form.valid" class="btn btn-success"
+          (click)="initiateEscrow(); newContract.reset()">Initiate Escrow</button>
+        <button type="reset" class="btn btn-default">Reset</button>
+      </div>
+    </form>
+    </div>
+  
+  </div>
+
+  

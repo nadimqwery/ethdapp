@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EthcontractService } from '../ethcontract.service';
 
-import { FormGroup, FormControl, FormBuilder, Validators } from '@Angular/forms';
 @Component({
   selector: 'app-transfer-form',
   templateUrl: './transfer-form.component.html',
@@ -9,7 +8,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@Angular/forms'
 })
 export class TransferFormComponent implements OnInit {
 
-   transferForm: FormGroup;
   accounts: any;
   transferFrom = '0x0';
   balance = '0 KON';
@@ -17,55 +15,34 @@ export class TransferFormComponent implements OnInit {
   amount = 0;
   remarks = '';
 
-  loading = false;
   submitted = false;
+  model = {'transferTo': '','amount': '', 'remarks': '' };
 
+  onSubmit() { this.submitted = true; }
 
-  constructor(private fb: FormBuilder, private ethcontractService: EthcontractService) {
+  constructor(private ethcontractService: EthcontractService) {
     this.initAndDisplayAccount();
   }
 
-  getTransferForm () {
-    return this.transferForm;
-  }
-
-  getTransferFrom() {
-    return this.transferForm.get('transferFrom');
-  }
-
-  getTransferTo() {
-    return this.transferForm.get('tranferTo');
-  }
-
-  getAmount() {
-    return this.transferForm.get('amount');
-  }
-
   ngOnInit() {
-
-    this.transferForm = this.fb.group({
-      transferFrom: [''],
-      transferTo: [''],
-      amount: [''],
-    });
-
+    
   }
 
   initAndDisplayAccount = () => {
     const that = this;
     this.ethcontractService
       .getAccountInfo()
-      .then(function(acctInfo: any) {
+      .then(function (acctInfo: any) {
         console.log(acctInfo);
         that.transferFrom = acctInfo.fromAccount;
         that.balance = acctInfo.balance;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
 
-  transferEther(event) {
+  transferEther() {
     const that = this;
     console.log(this.transferTo);
     this.ethcontractService
@@ -75,12 +52,14 @@ export class TransferFormComponent implements OnInit {
         this.amount,
         this.remarks
       )
-      .then(function() {
+      .then(function () {
         that.initAndDisplayAccount();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         that.initAndDisplayAccount();
       });
   }
+
+  get diagnostic() { return JSON.stringify(this.model); }
 }

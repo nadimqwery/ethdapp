@@ -23,12 +23,7 @@ export class EthcontractService {
       );
     }
 
-    window.web3 = new Web3(this.web3Provider);
-    window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
-    window.web3.eth.defaultAccount = '0xWalletAddres';
-    console.log (window.web3.eth.defaultAccount);
-
-  }
+    window.web3 = new Web3(this.web3Provider);  }
 
   getAccountInfo() {
     return new Promise((resolve, reject) => {
@@ -60,7 +55,7 @@ export class EthcontractService {
     return new Promise((resolve, reject) => {
       const paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(that.web3Provider);
-      console.log('Address:', paymentContract.address);
+  
       paymentContract
         .deployed()
         .then(function(instance: {
