@@ -6,9 +6,6 @@ The steps to get started:
 
 https://truffleframework.com/ganache
 
-Once installed and launched it shows up the blocks with address as below
-![Ganache](https://github.com/abhilashahyd/ethdapp/blob/master/transfer/src/assets/Ganache.PNG)
-
 2. Compile the truffle contracts using below command.
 
 ````
@@ -22,10 +19,6 @@ truffle migrate --reset --network ganache --compile-all
 > npm install
 
 > ng serve --open
-
-
-This should launch your angular application showing the ganache account details
-![ETHDAPP](https://github.com/abhilashahyd/ethdapp/blob/master/transfer/src/assets/ethdapp.PNG)
 
 You can get started with the transfer!
 "# ethdapp" 
