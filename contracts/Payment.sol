@@ -1,8 +1,10 @@
 pragma solidity >=0.4.22 <0.6.0;
 
-contract Payment {
+contract Payment { 
+
+
   address  transferFrom;
-  address payable transferTo;
+  address payable transferTo; 
   string public remarks;
   uint256 public  balance;
 
@@ -23,6 +25,5 @@ contract Payment {
   function getBalanceOfCurrentAccount() public payable returns (uint) {
     return transferFrom.balance;
   }
-
 
 }

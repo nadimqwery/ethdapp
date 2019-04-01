@@ -8,43 +8,27 @@ import { EthcontractService } from './ethcontract.service';
 })
 export class AppComponent {
   title = 'Ethereum Transfer App';
-  accounts:any;
-  transferFrom = '0x0';
-  balance ='0 ETH';
-  transferTo='';
-  amount=0;
-  remarks='';
+  isCertainButtonAlreadyActive: any;
+  activeButton: any;
+  constructor(private ethcontractService: EthcontractService) {
 
-  constructor( private ethcontractService: EthcontractService ){
-    this.initAndDisplayAccount();
   }
 
-  initAndDisplayAccount = () => {
-    let that = this;
-    this.ethcontractService.getAccountInfo().then(function(acctInfo : any){
-      console.log(acctInfo);
-      that.transferFrom = acctInfo.fromAccount;
-      that.balance = acctInfo.balance;
-    }).catch(function(error){
-      console.log(error);
-    });
+  onButtonGroupClick($event) {
+    const clickedElement = $event.target || $event.srcElement;
+    console.log(clickedElement);
+    if ( clickedElement.nodeName === 'A' ) {
+      this.isCertainButtonAlreadyActive = clickedElement.parentElement.parentElement.parentElement.querySelector('.active');
+      // if a Button already has Class: .active
+      if ( this.isCertainButtonAlreadyActive ) {
+        console.log(this.isCertainButtonAlreadyActive);
+        this.isCertainButtonAlreadyActive.classList.remove('active');
+      }
 
+      clickedElement.className += ' active';
+    }
 
-  };
-
-  transferEther(event){
-    let that = this;
-console.log(this.transferTo);
-    this.ethcontractService.transferEther(
-      this.transferFrom,
-      this.transferTo,
-      this.amount,
-      this.remarks
-    ).then(function(){
-      that.initAndDisplayAccount();
-    }).catch(function(error){
-      console.log(error);
-      that.initAndDisplayAccount();
-    });
   }
+
+
 }

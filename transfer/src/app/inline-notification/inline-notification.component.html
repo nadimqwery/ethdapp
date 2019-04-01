@@ -1,0 +1,8 @@
+<div class="inline-notification">
+    <div *ngFor="let notification of notifications" class="alert alert-{{notification.type}}">
+        <button type="button" class="close" (click)="remove(notification)">×</button>
+        <strong class="header"><span>{{notification.header}}</span></strong>
+        <strong *ngIf="notification.detail">:</strong>
+        <span class="detail">{{notification.detail}}</span>
+    </div>
+</div>
