@@ -21,6 +21,7 @@ import { EscrowComponent } from './escrow/escrow/escrow.component';
 import { RegisterBuyerComponent } from './escrow/register-buyer/register-buyer.component';
 import { RegisterSellerComponent } from './escrow/register-seller/register-seller.component';
 import { RegisterEscrowComponent } from './escrow/register-escrow/register-escrow.component';
+import {InlineNotificationComponent} from './inline-notification/inline-notification.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RegisterEscrowComponent } from './escrow/register-escrow/register-escro
     EscrowComponent,
     RegisterBuyerComponent,
     RegisterSellerComponent,
-    RegisterEscrowComponent
+    RegisterEscrowComponent,
+    InlineNotificationComponent
   ],
   imports: [
     BrowserModule,

@@ -17,4 +17,11 @@ export class RegisterSellerComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit() {
+    console.log('nadim');
+  }
+  registerSeller() {
+    console.log('nadim');
+  }
+
 }

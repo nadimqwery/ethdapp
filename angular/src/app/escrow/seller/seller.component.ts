@@ -16,20 +16,14 @@ export class SellerComponent implements OnInit {
   remarks = '';
 
   submitted = false;
-  model = {'sellerAddress': '','escrowAddress': '','amount' : '0',  'remarks': '' };
+  model = {'sellerAddress': '', 'escrowAddress': '', 'amount' : '0',  'remarks': '' };
 
   onSubmit() { this.submitted = true; }
   constructor(private ethcontractService: EthcontractService) {
-  
-
- 
-
-  
   }
 
   ngOnInit() {
     this.initAndDisplayAccount();
-    sellerAddress: new FormControl(this.sellerAddress, [])
 
   }
 
@@ -39,12 +33,15 @@ export class SellerComponent implements OnInit {
 
       .getAccountInfo()
       .then(function (acctInfo: any) {
-        //console.log(acctInfo);
+
         that.sellerAddress = acctInfo.fromAccount;
       })
       .catch(function (error) {
         console.log(error);
       });
+  }
+  initiateEscrow = () => {
+    console.log('test');
   }
 
 
