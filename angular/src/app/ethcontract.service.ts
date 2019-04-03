@@ -24,11 +24,17 @@ export class EthcontractService {
       this.web3Provider = window.web3.currentProvider;
     } else {
       //this.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-      this.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
-    }
+      this.web3Provider = new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
 
+    }
     //window.web3 = new Web3(this.web3Provider);
-    window.web3 = new Web3('https://ropsten.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
+    window.web3 = new Web3('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
+   
+    // window.web3.personal.unlockAccount('0xf5916AF28644D275B8CA89C88547B30d983a4842', 'Password@12345')	.then((response) => {
+    //   console.log(response);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   getAccountInfo() {
@@ -36,17 +42,31 @@ export class EthcontractService {
       window.web3.eth.getCoinbase(function (err: any, account: any) {
 
         if (err === null) {
-          window.web3.eth.getBalance(account, function (err: any, balance: any) {
-            if (err === null) {
-              return resolve({ fromAccount: account, balance: (window.web3.fromWei(balance, "ether")).toNumber() });
+          window.web3.eth.getBalance(account, function (error: any, balance: any) {
+            if (error === null) {
+              return resolve({ fromAccount: account, balance: (window.web3.fromWei(balance, 'ether')).toNumber() });
             } else {
-              return reject({ fromAccount: "error", balance: 0 });
+              return reject({ fromAccount: 'error', balance: 0 });
             }
           });
         }
       });
     });
   }
+
+  // getAccountInfo() {
+  //   let account;
+  //   setTimeout(() => {
+  //     window.web3.eth.getAccounts((err, accounts) => {
+  //       if (err) {
+  //         return;
+  //       }
+  //       account = accounts[0];
+  //       return account;
+  //     });
+  //   }, 1000);
+  // }
+
 
   transferEther(
     _transferFrom: string,
@@ -65,7 +85,7 @@ export class EthcontractService {
           _transferTo,
           {
             from: _transferFrom,
-            value: window.web3.toWei(_amount, "ether")
+            value: window.web3.toWei(_amount, 'ether')
           });
       }).then(function (status: any) {
         if (status) {
@@ -74,7 +94,7 @@ export class EthcontractService {
       }).catch(function (error: any) {
         console.log(error);
 
-        return reject("Error in transferEther service call");
+        return reject('Error in transferEther service call');
       });
     });
   }
