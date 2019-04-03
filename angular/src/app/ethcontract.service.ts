@@ -7,9 +7,9 @@ import { GlobalDataService } from './global-data.service';
 declare let require: any;
 declare let window: any;
 
-let tokenAbiPayment = require('../../../build/contracts/Payment.json');
+const tokenAbiPayment = require('../../../build/contracts/Payment.json');
 
-let tokenAbiEscrowDB = require('../../../build/contracts/EscrowDB.json');
+const tokenAbiEscrowDB = require('../../../build/contracts/EscrowDB.json');
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,12 @@ export class EthcontractService {
     if (typeof window.web3 !== 'undefined') {
       this.web3Provider = window.web3.currentProvider;
     } else {
-      this.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      //this.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      this.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
     }
 
-    window.web3 = new Web3(this.web3Provider);
+    //window.web3 = new Web3(this.web3Provider);
+    window.web3 = new Web3('https://ropsten.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
   }
 
   getAccountInfo() {

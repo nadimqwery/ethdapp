@@ -16,7 +16,8 @@ export class SellerComponent implements OnInit {
   remarks = '';
 
   submitted = false;
-  model = {'sellerAddress': '', 'escrowAddress': '', 'amount' : '0',  'remarks': '' };
+  alertVisible = false;
+  model = {'sellerAddress': '', 'escrowAddress': '', 'amount' : '0',  'remarks': '' , 'alertVisible' : 'false' };
 
   onSubmit() { this.submitted = true; }
   constructor(private ethcontractService: EthcontractService) {
@@ -41,6 +42,8 @@ export class SellerComponent implements OnInit {
       });
   }
   initiateEscrow = () => {
+    this.alertVisible = true;
+    this.model.alertVisible = 'true';
     console.log('test');
   }
 
