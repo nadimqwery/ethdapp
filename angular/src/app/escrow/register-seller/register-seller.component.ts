@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EthcontractService} from '../../ethcontract.service';
 
 @Component({
   selector: 'app-register-seller',
@@ -12,16 +13,17 @@ export class RegisterSellerComponent implements OnInit {
 
   submitted = false;
   model = {'sellerAddress': '','sellerName': '',  'remarks': '' };
-  constructor() { }
+  constructor(private ethcontractService: EthcontractService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log('nadim');
+  
   }
   registerSeller() {
-    console.log('nadim');
+    this.ethcontractService.RegisterSeller(this.model.sellerName, this.model.sellerAddress);
   }
+  
 
 }

@@ -22,6 +22,7 @@ import { RegisterBuyerComponent } from './escrow/register-buyer/register-buyer.c
 import { RegisterSellerComponent } from './escrow/register-seller/register-seller.component';
 import { RegisterEscrowComponent } from './escrow/register-escrow/register-escrow.component';
 import {InlineNotificationComponent} from './inline-notification/inline-notification.component';
+import { GlobalDataService } from './global-data.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import {InlineNotificationComponent} from './inline-notification/inline-notifica
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [EthcontractService ],
+  providers: [EthcontractService,GlobalDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
