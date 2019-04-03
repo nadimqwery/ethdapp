@@ -22,12 +22,16 @@ contract EscrowDB is Ownable {
         escrowList[msg.sender] = _name;
     }
 
-    function getBuyerFullInfo(address buyerAddress) public view returns (string  memory)
+    function getBuyerName(address _address) public view returns (string  memory name){
+        name = buyerList[_address];
+    }
+
+    function getBuyerFullInfo(address buyerAddress) public view  returns (string  memory)
     {
         return (buyerList[buyerAddress]);
     }
 
-    function getSellerFullInfo(address sellerAddress) public view returns (string memory)
+    function getSellerFullInfo(address sellerAddress)  view public returns (string memory)
     {
         return (sellerList[sellerAddress]);
     }

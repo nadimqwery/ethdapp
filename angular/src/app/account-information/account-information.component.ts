@@ -16,20 +16,26 @@ export class AccountInformationComponent implements OnInit {
   constructor(private ethcontractService: EthcontractService) {
 
     this.initAndDisplayAccount();
-
+    this.getSellerName(this.accountAddress);
    }
 
   ngOnInit() {
-    this.initAndDisplayAccount();
-    this.getSellerName(this.accountAddress);
+
+   
   }
 
-  getSellerName = (accountAddress: any) => {
+  getSellerName = (address:  any) => {
     const that = this;
-    this.accountName =   that.ethcontractService
-      .getSellerName(accountAddress);
-
-
+    that.ethcontractService
+      .getSellerName(address)
+      .then(function(acctInfo: any) {
+        that.accountAddress = acctInfo.fromAccount;
+        that.accountBalance = acctInfo.balance;
+       
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
 
@@ -39,7 +45,6 @@ export class AccountInformationComponent implements OnInit {
     that.ethcontractService
       .getAccountInfo()
       .then(function(acctInfo: any) {
-        console.log(acctInfo);
         that.accountAddress = acctInfo.fromAccount;
         that.accountBalance = acctInfo.balance;
        

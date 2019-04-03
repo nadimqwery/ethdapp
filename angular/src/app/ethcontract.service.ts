@@ -23,13 +23,13 @@ export class EthcontractService {
     if (typeof window.web3 !== 'undefined') {
       this.web3Provider = window.web3.currentProvider;
     } else {
-      //this.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-      this.web3Provider = new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
+      this.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      //this.web3Provider = new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
 
     }
-    //window.web3 = new Web3(this.web3Provider);
-    window.web3 = new Web3('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
-   
+    window.web3 = new Web3(this.web3Provider);
+    //window.web3 = new Web3('https://rinkeby.infura.io/v3/a52d89d7f34947b8b1f4a62f10299533');
+
     // window.web3.personal.unlockAccount('0xf5916AF28644D275B8CA89C88547B30d983a4842', 'Password@12345')	.then((response) => {
     //   console.log(response);
     // }).catch((error) => {
@@ -101,27 +101,52 @@ export class EthcontractService {
 
   RegisterSeller(_name, _address) {
     let that = this;
-    let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
-    escrowDBContract.setProvider(that.web3Provider);
-    let fd = escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']);
-    fd.registerSeller(_name,
-      {
-        from: _address
-      });
+    return new Promise((resolve, reject) => {
+      let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
+      escrowDBContract.setProvider(that.web3Provider);
+      escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']).then(
+        function (instance: { registerSeller: (arg0: any ,  arg1: { from: any; value: any; }) => string; }) {
+          return  instance.registerSeller( _name, {
+            from: _address,
+            value: window.web3.toWei(0, 'ether')
+          })
+        }).then(function (status: any) {
+          if (status) {
+            return resolve({ status: true });
+          }
+        }).catch(function (error: any) {
+          console.log(error);
+
+          return reject('Error in transferEther service call');
+        });
+    });
+
   }
 
 
-  RegisterBuyer(_name, address) {
+  RegisterBuyer(_name, _address) {
     let that = this;
-    let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
-    escrowDBContract.setProvider(that.web3Provider);
-    let fd = escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']);
-    fd.registerBuyer(_name,
-      {
-        from: address
-      });
-  }
+    return new Promise((resolve, reject) => {
+      let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
+      escrowDBContract.setProvider(that.web3Provider);
+      escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']).then(
+        function (instance: { registerBuyer: (arg0: any ,  arg1: { from: any; value: any; }) => string; }) {
+          return  instance.registerBuyer( _name, {
+            from: _address,
+            value: window.web3.toWei(0, 'ether')
+          })
+        }).then(function (status: any) {
+          if (status) {
+            return resolve({ status: true });
+          }
+        }).catch(function (error: any) {
+          console.log(error);
 
+          return reject('Error in transferEther service call');
+        });
+    });
+
+  }
   RegisterEscrow(_name, address) {
     let that = this;
     let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
@@ -133,16 +158,24 @@ export class EthcontractService {
       });
   }
 
-  getSellerName (_address) {
-
-
-
-      let that = this;
+  getSellerName( _address) {
+    let that = this;
+    return new Promise((resolve, reject) => {
       let escrowDBContract = TruffleContract(tokenAbiEscrowDB);
       escrowDBContract.setProvider(that.web3Provider);
-       return escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']).sellerList[_address];
+      escrowDBContract.at(that.globalDataService.shareObj['EscrowDBAddress']).then(
+        function (instance: { getBuyerName: (arg0: any) => void; }) {
+          return instance.getBuyerName(_address)
+        }).then(function (name: any) {
+          
+            return resolve({name});
+          
+        }).catch(function (error: any) {
+          console.log(error);
+          return reject('Error in transferEther service call');
+        });
+    });
 
-      
   }
 
   getBuyerName(_address) {
@@ -153,7 +186,7 @@ export class EthcontractService {
     let name = fd.getBuyerFullInfo(_address);
     return name;
   }
- 
+
 
   getEscrowFullInfo(_address) {
     let that = this;

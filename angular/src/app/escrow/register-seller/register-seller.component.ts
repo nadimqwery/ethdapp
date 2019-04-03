@@ -21,8 +21,15 @@ export class RegisterSellerComponent implements OnInit {
   onSubmit() {
   
   }
-  registerSeller() {
-    this.ethcontractService.RegisterSeller(this.model.sellerName, this.model.sellerAddress);
+  registerSeller = () => {
+    const that = this;
+    that.ethcontractService
+      .RegisterBuyer(this.model.sellerName, this.model.sellerAddress)
+      .then(function() {
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
   
 

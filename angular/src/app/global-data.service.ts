@@ -12,7 +12,7 @@ interface ShareObj {
 })
 export class GlobalDataService {
 
-  shareObj: ShareObj = {'EscrowDBAddress': '0x7820AD72F4D32679460589110D989c148Aa2ddD4'
+  shareObj: ShareObj = {'EscrowDBAddress': '0xe66240dD7F8AeCfD31e49d3FF988D4140D4ee50f'
 
 };
 
